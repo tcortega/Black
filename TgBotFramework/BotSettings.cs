@@ -7,5 +7,6 @@ namespace TgBotFramework
         public string WebhookPath { get; set; }
         public string BaseUrl { get; set; }
         public string Username { get; set; }
+        public string DeveloperId { get; set; }
     }
 }
