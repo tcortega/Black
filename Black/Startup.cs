@@ -33,6 +33,7 @@ namespace TelegramBot
             services.AddScoped<GlobalExceptionHandler>();
             services.AddScoped<MessageHandler>();
             services.AddScoped<StartCommand>();
+            services.AddScoped<PingCommand>();
 
             services.AddDbContext<BotFrameworkContext>(x => x.UseSqlite("Data Source=BlackBot.sqlite"));
 
