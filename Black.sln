@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31515.178
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Black", "Black\Black.csproj", "{BC0FB7E3-C94F-474E-845C-CED0A968466E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Black", "Black", "{43F2884F-F15F-4668-8376-43C931BCCA1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Black.Bot", "Black.Bot", "{D27A5EF5-B1B1-4D2F-90A9-538BDE06EDF1}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Black.Bot", "Black.Bot\Black.Bot.csproj", "{DCB2718B-92BC-4D00-90D5-55B1481D0C61}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TgBotFramework", "TgBotFramework", "{8D69F4FC-5449-4ED1-996F-5783B456E50B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgBotFramework", "TgBotFramework\TgBotFramework.csproj", "{51CE1395-5A82-4565-AC88-173D8DFF0F7F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TgBotFramework.Data.EF", "TgBotFramework.Data.EF", "{AC5DE395-0123-4E4B-A1DB-1ED7942CCE66}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TgBotFramework.Data.EF", "TgBotFramework.Data.EF\TgBotFramework.Data.EF.csproj", "{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BC0FB7E3-C94F-474E-845C-CED0A968466E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC0FB7E3-C94F-474E-845C-CED0A968466E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC0FB7E3-C94F-474E-845C-CED0A968466E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC0FB7E3-C94F-474E-845C-CED0A968466E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCB2718B-92BC-4D00-90D5-55B1481D0C61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCB2718B-92BC-4D00-90D5-55B1481D0C61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCB2718B-92BC-4D00-90D5-55B1481D0C61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCB2718B-92BC-4D00-90D5-55B1481D0C61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51CE1395-5A82-4565-AC88-173D8DFF0F7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51CE1395-5A82-4565-AC88-173D8DFF0F7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51CE1395-5A82-4565-AC88-173D8DFF0F7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51CE1395-5A82-4565-AC88-173D8DFF0F7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BC0FB7E3-C94F-474E-845C-CED0A968466E} = {43F2884F-F15F-4668-8376-43C931BCCA1D}
+		{DCB2718B-92BC-4D00-90D5-55B1481D0C61} = {D27A5EF5-B1B1-4D2F-90A9-538BDE06EDF1}
+		{51CE1395-5A82-4565-AC88-173D8DFF0F7F} = {8D69F4FC-5449-4ED1-996F-5783B456E50B}
+		{52D5E8DA-E0F1-4B71-B314-DDDAB1E7BC25} = {AC5DE395-0123-4E4B-A1DB-1ED7942CCE66}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EC580DF9-903E-4759-8BE6-CF9A9AEBB734}
+	EndGlobalSection
+EndGlobal
