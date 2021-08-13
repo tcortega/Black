@@ -32,6 +32,7 @@ namespace TelegramBot
             services.AddScoped<UpdateLogger>();
             services.AddScoped<GlobalExceptionHandler>();
             services.AddScoped<MessageHandler>();
+            services.AddScoped<StartCommand>();
 
             services.AddDbContext<BotFrameworkContext>(x => x.UseSqlite("Data Source=BlackBot.sqlite"));
 
@@ -53,8 +54,9 @@ namespace TelegramBot
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, BotFrameworkContext db)
         {
+            db.Database.EnsureCreated();
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
