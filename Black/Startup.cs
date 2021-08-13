@@ -1,4 +1,5 @@
 using Black.Bot;
+using Black.Bot.Commands;
 using Black.Bot.Handler;
 using Black.Bot.Handlers;
 using Microsoft.AspNetCore.Builder;
@@ -45,8 +46,14 @@ namespace TelegramBot
                 .UseMiddleware<GlobalExceptionHandler>()
                 .UseStates(blackBotAssembly)
                 .UseEF()
-                .UseCommands(blackBotAssembly));
-                //.SetPipeline(pipeLineBuilder => pipeLineBuilder.MapWhen(On.Message)
+                .UseCommands(blackBotAssembly)
+                .SetPipeline(pipelineBuilder => pipelineBuilder
+                    .MapWhen(On.Message, onMessageBuilder => onMessageBuilder
+                        .UseCommand<StartCommand>("start")
+                        .Use<MessageHandler>()
+                        )
+                    )
+                );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
