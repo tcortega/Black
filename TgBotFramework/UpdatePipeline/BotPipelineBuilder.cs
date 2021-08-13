@@ -4,7 +4,9 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
+using TgBotFramework.Attributes;
 using TgBotFramework.DataStructures;
 using TgBotFramework.Exceptions;
 
@@ -127,6 +129,7 @@ namespace TgBotFramework.UpdatePipeline
             {
                 ServiceCollection.AddScoped(pair.Value);
             }
+
             _components.Add(next => (context, cancellationToken) =>
             {
                 if (string.IsNullOrWhiteSpace(context.Update.Message?.Text) || !(context.Update.Message.Text.StartsWith('/') || context.Update.Message.Text.Length > 1))
@@ -141,6 +144,15 @@ namespace TgBotFramework.UpdatePipeline
                     if (type.IsGenericTypeDefinition)
                     {
                         realType = type.MakeGenericType(typeof(TContext));
+                    }
+
+                    var validationsList = realType.GetCustomAttributes<CommandValidationAttribute>(false);
+                    foreach (var validation in validationsList)
+                    {
+                        var validationResult = validation.CheckPermissionsAsync(context).GetAwaiter().GetResult();
+
+                        if (!validationResult.IsSuccess)
+                            return validation.NotEnoughPermissions(context, validationResult.ErrorReason);
                     }
 
                     if (context.Services.GetService(realType) is IUpdateHandler<TContext> handler)

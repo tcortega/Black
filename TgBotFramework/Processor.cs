@@ -109,7 +109,7 @@ namespace TgBotFramework
                 Debug.Assert(attribute != null, nameof(attribute) + " != null");
                 _commands.Add(attribute.Text, command);
             }
-            // check for other
+
             if (_commands.Count != 0)
                 pipe.CheckCommands(_commands);
         }
