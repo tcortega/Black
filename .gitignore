@@ -370,3 +370,4 @@ riderModule.iml
 /_ReSharper.Caches/
 .idea/
 appsettings.json
+*.sqlite
