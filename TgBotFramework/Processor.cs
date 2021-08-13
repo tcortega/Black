@@ -1,3 +1,6 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -6,21 +9,15 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Telegram.Bot;
-using Telegram.Bot.Types;
 using TgBotFramework.Attributes;
 using TgBotFramework.Exceptions;
 using TgBotFramework.UpdatePipeline;
-using TgBotFramework.WrapperExtensions;
 
 namespace TgBotFramework
 {
-    public class BotService<TBot, TContext> : BackgroundService  
+    public class BotService<TBot, TContext> : BackgroundService
         where TBot : BaseBot
-        where TContext : IUpdateContext 
+        where TContext : IUpdateContext
     {
         private readonly ILogger<BotService<TBot, TContext>> _logger;
         private readonly IServiceProvider _serviceProvider;
@@ -28,14 +25,14 @@ namespace TgBotFramework
         private readonly ChannelReader<IUpdateContext> _updatesQueue;
         private readonly UpdateDelegate<TContext> _updateHandler;
         private SortedDictionary<string, Type> _stages;
-        private SortedDictionary<string,Type> _commands;
+        private SortedDictionary<string, Type> _commands;
 
         public BotService(ILogger<BotService<TBot, TContext>> logger,
             IServiceProvider serviceProvider,
-            Channel<IUpdateContext> updatesQueue, 
-            TBot bot, 
+            Channel<IUpdateContext> updatesQueue,
+            TBot bot,
             UpdatePipelineSettings<TContext> updatePipelineSettings
-            ) 
+            )
         {
             _logger = logger;
             _serviceProvider = serviceProvider;
@@ -48,13 +45,13 @@ namespace TgBotFramework
             // add middlewares 
             foreach (var middleware in updatePipelineSettings.Middlewares)
             {
-                if (middleware.GetInterfaces().Any(x=> x == typeof(IUpdateHandler<TContext>)))
+                if (middleware.GetInterfaces().Any(x => x == typeof(IUpdateHandler<TContext>)))
                 {
                     pipe.Use(middleware);
                 }
                 // check for other
             }
-            
+
             // add states
             SetUpStagesInPipeline(updatePipelineSettings, pipe);
 
@@ -65,7 +62,7 @@ namespace TgBotFramework
             updatePipelineSettings.PipeSettings(pipe);
 
             CheckPipeline(pipe, serviceProvider);
-            
+
             _updateHandler = pipe.Build();
         }
 
@@ -79,7 +76,7 @@ namespace TgBotFramework
                 {
                     typeToResolve = type.ServiceType.MakeGenericType(typeof(TContext));
                 }
-                
+
                 if (scope.ServiceProvider.GetService(typeToResolve) == null)
                 {
                     _logger.LogCritical("There is no service type of {0} in DI", typeToResolve.FullName);
@@ -128,7 +125,7 @@ namespace TgBotFramework
                     update.Services = scope.ServiceProvider;
                     update.Client = _bot.Client;
                     update.Bot = _bot;
-                    await _updateHandler((TContext) update, stoppingToken);
+                    await _updateHandler((TContext)update, stoppingToken);
 
                     if (update.Result != null)
                     {
@@ -139,7 +136,7 @@ namespace TgBotFramework
                 catch (Exception e)
                 {
                     _logger.LogCritical(e, "Oops");
-                    
+
                 }
             }
         }

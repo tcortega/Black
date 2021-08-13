@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-using System.Threading.Channels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Reflection;
 using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
@@ -13,7 +11,7 @@ namespace TgBotFramework
         IServiceCollection Services { get; }
         IUpdateContext Context { get; set; }
         UpdatePipelineSettings<TContext> UpdatePipelineSettings { get; set; }
-        
+
         IBotFrameworkBuilder<TContext> UseLongPolling<T>(
             LongPollingOptions longPollingOptions)
             where T : BackgroundService, IPollingManager<TContext>;

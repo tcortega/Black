@@ -1,13 +1,8 @@
-using System;
-using System.Runtime.CompilerServices;
-using System.Threading.Channels;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
-using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 using Telegram.Bot;
-using Telegram.Bot.Types;
-using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
 {
@@ -15,17 +10,17 @@ namespace TgBotFramework
     public static class DIExtensions
     {
         public static IServiceCollection AddBotService<TBot, TContext>
-            (this IServiceCollection services, Action<IBotFrameworkBuilder<TContext>> configure) 
+            (this IServiceCollection services, Action<IBotFrameworkBuilder<TContext>> configure)
             where TBot : BaseBot
-            where TContext : BaseUpdateContext 
+            where TContext : BaseUpdateContext
         {
             var builder = new BotFrameworkBuilder<TContext, TBot>(services);
             configure(builder);
 
             return services;
         }
-        
-        
+
+
         public static void EnsureWebhookSet<TBot>(
             this IServiceProvider app
         )

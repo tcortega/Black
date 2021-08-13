@@ -1,12 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Collections.Immutable;
-using System.ComponentModel;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using TgBotFramework.DataStructures;
 using TgBotFramework.Exceptions;
 
@@ -97,7 +95,7 @@ namespace TgBotFramework.UpdatePipeline
 
         internal IBotPipelineBuilder<TContext> CheckStages(SortedDictionary<string, Type> stages)
         {
-            foreach (KeyValuePair<string,Type> pair in stages)
+            foreach (KeyValuePair<string, Type> pair in stages)
             {
                 ServiceCollection.AddScoped(pair.Value);
             }
@@ -111,13 +109,13 @@ namespace TgBotFramework.UpdatePipeline
                     {
                         realType = type.MakeGenericType(typeof(TContext));
                     }
-                    if(context.Services.GetService(realType) is IUpdateHandler<TContext> handler)
+                    if (context.Services.GetService(realType) is IUpdateHandler<TContext> handler)
                         return handler.HandleAsync(context, next, cancellationToken);
                     else
                     {
                         throw new PipelineException("Class wasn't registered: {0}", realType.FullName);
                     }
-                } 
+                }
                 return next(context, cancellationToken);
             });
 
@@ -125,17 +123,17 @@ namespace TgBotFramework.UpdatePipeline
         }
         internal IBotPipelineBuilder<TContext> CheckCommands(SortedDictionary<string, Type> commands)
         {
-            foreach (KeyValuePair<string,Type> pair in commands)
+            foreach (KeyValuePair<string, Type> pair in commands)
             {
                 ServiceCollection.AddScoped(pair.Value);
             }
             _components.Add(next => (context, cancellationToken) =>
             {
-                if (string.IsNullOrWhiteSpace(context.Update.Message?.Text) || !(context.Update.Message.Text.StartsWith('/') || context.Update.Message.Text.Length>1 ) )
+                if (string.IsNullOrWhiteSpace(context.Update.Message?.Text) || !(context.Update.Message.Text.StartsWith('/') || context.Update.Message.Text.Length > 1))
                 {
-                    return next(context, cancellationToken); 
+                    return next(context, cancellationToken);
                 }
-                
+
                 var type = commands.PrefixSearch(context.Update.Message.Text[1..]);
                 if (type != null)
                 {
@@ -159,7 +157,7 @@ namespace TgBotFramework.UpdatePipeline
 
             return this;
         }
-        
+
 
         public IBotPipelineBuilder<TContext> Use<THandler>(THandler handler)
             where THandler : IUpdateHandler<TContext>
@@ -227,10 +225,10 @@ namespace TgBotFramework.UpdatePipeline
         )
             where TCommand : CommandBase<TContext>
         {
-           return MapWhen(
-                    ctx => ctx.Bot.CanHandleCommand(command, ctx.Update.Message),
-                    botBuilder => botBuilder.Use<TCommand>()
-                );
+            return MapWhen(
+                     ctx => ctx.Bot.CanHandleCommand(command, ctx.Update.Message),
+                     botBuilder => botBuilder.Use<TCommand>()
+                 );
         }
     }
 }

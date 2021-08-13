@@ -2,7 +2,7 @@ using System;
 
 namespace TgBotFramework.Attributes
 {
-    [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct, AllowMultiple = true, Inherited = false )]
+    [System.AttributeUsage(System.AttributeTargets.Class | System.AttributeTargets.Struct, AllowMultiple = true, Inherited = false)]
     public class ScopeAttribute : Attribute
     {
         public ScopeEnum Scope { get; }

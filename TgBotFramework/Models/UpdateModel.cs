@@ -1,5 +1,3 @@
-using Telegram.Bot.Requests;
-
 namespace TgBotFramework.Models
 {
     public class UpdateModel

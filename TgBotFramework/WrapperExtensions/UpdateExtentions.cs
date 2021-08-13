@@ -1,5 +1,5 @@
-using System;
 using Newtonsoft.Json;
+using System;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
@@ -49,7 +49,7 @@ namespace TgBotFramework.WrapperExtensions
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         /// <summary>
         /// Returns sender for updates with sender, null otherwise. Exception in case of new update type.   
         /// </summary>
@@ -92,7 +92,7 @@ namespace TgBotFramework.WrapperExtensions
                     throw new ArgumentOutOfRangeException();
             }
         }
-        
+
         /// <summary>
         /// Returns chat for updates with chat, null otherwise. Exception in case of new update type.   
         /// </summary>
@@ -138,7 +138,7 @@ namespace TgBotFramework.WrapperExtensions
         /// <returns></returns>
         public static string ToJsonString(this Update update, bool formatted = true)
         {
-            return JsonConvert.SerializeObject(update, formatted? Formatting.Indented : Formatting.None);
+            return JsonConvert.SerializeObject(update, formatted ? Formatting.Indented : Formatting.None);
         }
     }
 }

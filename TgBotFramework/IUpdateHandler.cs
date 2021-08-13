@@ -8,6 +8,6 @@ namespace TgBotFramework
     /// </summary>
     public interface IUpdateHandler<TContext> where TContext : IUpdateContext
     {
-        Task HandleAsync(TContext context, UpdateDelegate<TContext> next, CancellationToken cancellationToken) ;
+        Task HandleAsync(TContext context, UpdateDelegate<TContext> next, CancellationToken cancellationToken);
     }
 }

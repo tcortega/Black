@@ -13,8 +13,8 @@ namespace TgBotFramework.DataStructures
                 {
                     continue;
                 }
-                
-                if(pair.Key[0] == searchValue[0] && searchValue.Length <= pair.Key.Length)
+
+                if (pair.Key[0] == searchValue[0] && searchValue.Length <= pair.Key.Length)
                 {
                     if (CompareStrings(searchValue, pair.Key))
                     {
@@ -29,7 +29,7 @@ namespace TgBotFramework.DataStructures
 
             return null;
         }
-        
+
         private static bool CompareStrings(string searchValue, string other)
         {
             for (var i = 1; i < searchValue.Length; i++)

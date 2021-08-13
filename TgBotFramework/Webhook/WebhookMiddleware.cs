@@ -1,11 +1,11 @@
-using System;
-using System.IO;
-using System.Threading.Channels;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Threading.Channels;
+using System.Threading.Tasks;
 using Telegram.Bot.Types;
 
 namespace TgBotFramework.Webhook
@@ -18,7 +18,7 @@ namespace TgBotFramework.Webhook
         private readonly ILogger<WebhookMiddleware> _logger;
         private readonly WebhookSettings _settings;
 
-        public WebhookMiddleware(RequestDelegate next, 
+        public WebhookMiddleware(RequestDelegate next,
             Channel<IUpdateContext> channel, IServiceProvider serviceProvider, ILogger<WebhookMiddleware> logger, WebhookSettings settings)
         {
             _next = next;
@@ -36,13 +36,13 @@ namespace TgBotFramework.Webhook
                 await _next.Invoke(context);
                 return;
             }
-            
+
             string body;
             using (var reader = new StreamReader(context.Request.Body))
             {
                 body = await reader.ReadToEndAsync();
             }
-            
+
             Update update = null;
             try
             {
@@ -52,7 +52,7 @@ namespace TgBotFramework.Webhook
             {
                 _logger.LogError("Unable to deserialize update body. {0}", e.Message);
             }
-            
+
             if (update == null)
             {
                 // it is unlikely of Telegram to send an invalid update object.

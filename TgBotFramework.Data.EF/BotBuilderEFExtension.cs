@@ -1,7 +1,4 @@
-﻿using System;
-using System.Drawing;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace TgBotFramework.Data.EF
 {
@@ -14,5 +11,5 @@ namespace TgBotFramework.Data.EF
             return builder;
         }
     }
-    
+
 }

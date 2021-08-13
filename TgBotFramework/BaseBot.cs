@@ -1,18 +1,14 @@
+using Microsoft.Extensions.Options;
 using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.Extensions.Options;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
 
 namespace TgBotFramework
 {
-    public class BaseBot 
+    public class BaseBot
     {
         public TelegramBotClient Client { get; }
         public string Username { get; }
@@ -22,7 +18,7 @@ namespace TgBotFramework
             Client = new TelegramBotClient(options.Value.ApiToken, baseUrl: options.Value.BaseUrl);
             Username = options.Value.Username;
         }
-        
+
         public bool CanHandleCommand(string commandName, Message message)
         {
             if (string.IsNullOrWhiteSpace(commandName))

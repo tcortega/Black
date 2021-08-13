@@ -1,5 +1,4 @@
-﻿using System;
-using TgBotFramework;
+﻿using TgBotFramework;
 
 namespace Black.Bot
 {

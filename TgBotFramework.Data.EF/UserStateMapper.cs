@@ -1,4 +1,3 @@
-using System;
 using System.Threading;
 using System.Threading.Tasks;
 using TgBotFramework.Models;
@@ -31,7 +30,7 @@ namespace TgBotFramework.Data.EF
             }
             UserModelMapper.MapModelToState(context.UserState, userDbObject);
 
-            await next(context, cancellationToken); 
+            await next(context, cancellationToken);
 
             if (UserModelMapper.MapStateToModel(context.UserState, userDbObject))
             {

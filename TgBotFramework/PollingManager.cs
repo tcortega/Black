@@ -1,14 +1,13 @@
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Channels;
 using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Telegram.Bot;
-using TgBotFramework.UpdatePipeline;
 
 namespace TgBotFramework
 {
@@ -20,14 +19,14 @@ namespace TgBotFramework
         private readonly IServiceProvider _serviceProvider;
         private readonly ChannelWriter<IUpdateContext> _channel;
         private readonly TelegramBotClient Client;
-        
+
 
         public PollingManager(
-            ILogger<PollingManager<TContext>> logger, 
-            LongPollingOptions pollingOptions, 
-            IOptions<BotSettings> botOptions, 
+            ILogger<PollingManager<TContext>> logger,
+            LongPollingOptions pollingOptions,
+            IOptions<BotSettings> botOptions,
             Channel<IUpdateContext> channel,
-            IServiceProvider serviceProvider) 
+            IServiceProvider serviceProvider)
         {
             _logger = logger;
             _pollingOptions = pollingOptions;
@@ -49,10 +48,10 @@ namespace TgBotFramework
                     foreach (var update in updates)
                     {
                         var updateContext = _serviceProvider.GetService<IUpdateContext>();
-                        
+
                         Debug.Assert(updateContext != null, nameof(updateContext) + " != null");
                         updateContext.Update = update;
-                        
+
                         await _channel.WriteAsync(updateContext, cancellationToken);
                         messageOffset = update.Id + 1;
 
@@ -71,7 +70,7 @@ namespace TgBotFramework
         }
     }
 
-    public interface IPollingManager<in TContext> 
+    public interface IPollingManager<in TContext>
         where TContext : IUpdateContext
     {
     }

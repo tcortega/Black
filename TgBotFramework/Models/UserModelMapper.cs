@@ -9,7 +9,7 @@ namespace TgBotFramework.Models
             state.Step = model.Step;
             state.LanguageCode = model.LanguageCode;
         }
-        
+
         public static bool MapStateToModel(UserState contextUserState, UserModel userDbObject)
         {
             bool result = false;
@@ -29,7 +29,7 @@ namespace TgBotFramework.Models
                 userDbObject.Stage = contextUserState.Stage;
                 result = true;
             }
-            
+
             if (contextUserState.Step != userDbObject.Step)
             {
                 userDbObject.Step = contextUserState.Step;

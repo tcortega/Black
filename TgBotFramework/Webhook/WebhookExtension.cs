@@ -1,4 +1,3 @@
-using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -34,7 +33,7 @@ namespace TgBotFramework.Webhook
             {
                 throw new FrameworkException("Settings file should contain WebhookDomain AND WebhookPath");
             }
-            
+
             app.Map(
                 options.Value.WebhookPath,
                 builder =>
@@ -49,10 +48,10 @@ namespace TgBotFramework.Webhook
 
             app.ApplicationServices.GetService<ILogger<WebhookMiddleware>>().LogInformation("Webhook set, info:\n{0}",
                 JsonConvert.SerializeObject(webhookInfo, Formatting.Indented));
-            
+
             return app;
         }
-        
+
         public static IApplicationBuilder UseTelegramBotWebhook<WebhookMiddleware>(
             this IApplicationBuilder app
         )
@@ -68,7 +67,7 @@ namespace TgBotFramework.Webhook
             {
                 throw new FrameworkException("Settings file should contain WebhookDomain AND WebhookPath");
             }
-            
+
             app.Map(
                 options.Value.WebhookPath,
                 builder =>
@@ -78,7 +77,7 @@ namespace TgBotFramework.Webhook
 
             bot.Client.SetWebhookAsync(settings.WebhookUrl, settings.Certificate, settings.IpAddress,
                 settings.MaxConnection, settings.AllowedUpdates, settings.DropPendingUpdates).GetAwaiter().GetResult();
-            
+
             return app;
         }
     }

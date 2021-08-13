@@ -4,7 +4,7 @@ namespace TgBotFramework
 {
     public abstract class BasicState
     {
-        public IUpdateContext State { get;  }
+        public IUpdateContext State { get; }
 
         public BasicState(IUpdateContext state)
         {
@@ -13,9 +13,9 @@ namespace TgBotFramework
 
         public virtual async Task Enter()
         {
-            
+
         }
-        
+
         public virtual async Task Exit()
         {
             State.UserState.Stage = "default";
