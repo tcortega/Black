@@ -8,7 +8,6 @@ using TgBotFramework.WrapperExtensions;
 
 namespace Black.Bot.Commands
 {
-    [DeveloperFeature]
     [Command("ping")]
     public class PingCommand : CommandBase<BlackBotContext>
     {

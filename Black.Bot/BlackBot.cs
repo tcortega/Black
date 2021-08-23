@@ -5,7 +5,7 @@ namespace Black.Bot
 {
     public class BlackBot : BaseBot
     {
-        public BlackBot(IOptions<BotSettings> options) : base(options)
+        public BlackBot(IOptions<BlackBotSettings> options) : base(options)
         {
         }
     }

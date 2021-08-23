@@ -12,9 +12,11 @@ namespace TgBotFramework
     {
         public TelegramBotClient Client { get; }
         public string Username { get; }
+        public IOptions<BotSettings> Options { get; }
 
         public BaseBot(IOptions<BotSettings> options)
         {
+            Options = options;
             Client = new TelegramBotClient(options.Value.ApiToken, baseUrl: options.Value.BaseUrl);
             Username = options.Value.Username;
         }

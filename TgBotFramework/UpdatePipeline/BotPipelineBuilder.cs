@@ -132,12 +132,13 @@ namespace TgBotFramework.UpdatePipeline
 
             _components.Add(next => (context, cancellationToken) =>
             {
-                if (string.IsNullOrWhiteSpace(context.Update.Message?.Text) || !(context.Update.Message.Text.StartsWith('/') || context.Update.Message.Text.Length > 1))
+                if (string.IsNullOrWhiteSpace(context.Update.Message?.Text) || !context.Update.Message.Text.StartsWith('/') || context.Update.Message.Text.Length <= 1)
                 {
                     return next(context, cancellationToken);
                 }
 
-                var type = commands.PrefixSearch(context.Update.Message.Text[1..]);
+                var command = context.Update.Message.Text.Split()[0];
+                var type = commands.PrefixSearch(command[1..]);
                 if (type != null)
                 {
                     var realType = type;

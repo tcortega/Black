@@ -7,7 +7,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Black.Bot\Black.Bot.csproj" />
-    <ProjectReference Include="..\TgBotFramework.Data.EF\TgBotFramework.Data.EF.csproj" />
+    <ProjectReference Include="..\TgBotFramework.Data.MongoDB\TgBotFramework.Data.MongoDB.csproj" />
     <ProjectReference Include="..\TgBotFramework\TgBotFramework.csproj" />
   </ItemGroup>
 
