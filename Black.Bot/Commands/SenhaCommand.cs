@@ -13,11 +13,11 @@ using TgBotFramework.WrapperExtensions;
 namespace Black.Bot.Commands
 {
     [LeakCheckFeature]
-    [Command("login")]
-    public class LoginCommand : CommandBase<BlackBotContext>
+    [Command("senha")]
+    public class SenhaCommand : CommandBase<BlackBotContext>
     {
         private readonly LeakCheckService _leakCheckService;
-        public LoginCommand(LeakCheckService leakCheckService)
+        public SenhaCommand(LeakCheckService leakCheckService)
         {
             _leakCheckService = leakCheckService;
         }
@@ -31,7 +31,7 @@ namespace Black.Bot.Commands
             }
 
             var data = args[0];
-            var response = await _leakCheckService.Lookup(data);
+            var response = await _leakCheckService.Lookup(data, "pass_email");
             if (response.Success)
             {
                 if (response.Result.Length <= 15)

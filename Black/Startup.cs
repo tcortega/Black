@@ -11,7 +11,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MongoDB.Driver;
-using System.Net.Http;
 using System.Reflection;
 using TgBotFramework;
 using TgBotFramework.Data.MongoDB;
@@ -40,6 +39,7 @@ namespace TelegramBot
             services.AddScoped<StartCommand>();
             services.AddScoped<PingCommand>();
             services.AddScoped<LoginCommand>();
+            services.AddScoped<DominioCommand>();
             services.AddHttpClient();
 
             services.AddSingleton<LeakCheckService>();

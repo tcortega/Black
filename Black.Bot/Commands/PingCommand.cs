@@ -1,5 +1,4 @@
-﻿using Black.Bot.Validations;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using TgBotFramework;
