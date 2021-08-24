@@ -1,8 +1,12 @@
-﻿namespace Black.Bot.Models
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
+using System.ComponentModel.DataAnnotations;
+
+namespace Black.Bot.Models
 {
-    public class UserModel
+    public class UserModel : BaseModel
     {
-        public int Id { get; set; }
+        [Required]
         public long TelegramId { get; set; }
     }
 }

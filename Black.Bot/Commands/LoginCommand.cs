@@ -12,7 +12,7 @@ using TgBotFramework.WrapperExtensions;
 
 namespace Black.Bot.Commands
 {
-    [LeakCheckFeature]
+    [NeedSubscription]
     [Command("login")]
     public class LoginCommand : CommandBase<BlackBotContext>
     {

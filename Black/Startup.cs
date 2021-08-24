@@ -40,9 +40,14 @@ namespace TelegramBot
             services.AddScoped<PingCommand>();
             services.AddScoped<LoginCommand>();
             services.AddScoped<DominioCommand>();
+            services.AddScoped<SenhaCommand>();
+            services.AddScoped<AtivarCommand>();
+            services.AddScoped<KeyCommand>();
+            services.AddScoped<UserMapper<BlackBotContext>>();
             services.AddHttpClient();
 
             services.AddSingleton<LeakCheckService>();
+            services.AddHostedService<KeyUpdaterService>();
 
             var connectionString = Configuration.GetConnectionString("MongoDB");
             var blackBotAssembly = Assembly.GetAssembly(typeof(BlackBot));
@@ -53,6 +58,7 @@ namespace TelegramBot
                 .UseMiddleware<GlobalExceptionHandler>()
                 .UseStates(blackBotAssembly)
                 .UseMongoDb(new MongoUrl(connectionString))
+                .UseMiddleware<UserMapper<BlackBotContext>>()
                 .UseCommands(blackBotAssembly)
                 .SetPipeline(pipelineBuilder => pipelineBuilder
                     .MapWhen(On.Message, onMessageBuilder => onMessageBuilder
