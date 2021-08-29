@@ -147,7 +147,8 @@ namespace TgBotFramework.UpdatePipeline
                         realType = type.MakeGenericType(typeof(TContext));
                     }
 
-                    var validationsList = realType.GetCustomAttributes<CommandValidationAttribute>(false);
+                    var validationsList = realType.GetCustomAttributesWithInterface<ICommandValidationAttribute<TContext>>();
+
                     foreach (var validation in validationsList)
                     {
                         var validationResult = validation.CheckPermissionsAsync(context).GetAwaiter().GetResult();

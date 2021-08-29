@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
 using TgBotFramework;
@@ -8,9 +9,9 @@ using TgBotFramework.WrapperExtensions;
 
 namespace Black.Bot.Validations
 {
-    public class DeveloperFeatureAttribute : CommandValidationAttribute
+    public class DeveloperFeatureAttribute : Attribute, ICommandValidationAttribute<BlackBotContext>
     {
-        public override Task<ValidationResult> CheckPermissionsAsync(IUpdateContext context, string[] args)
+        public Task<ValidationResult> CheckPermissionsAsync(BlackBotContext context, string[] args)
         {
             var options = context.Bot.Options;
             var senderId = context.Update.GetSenderId().ToString();
@@ -21,7 +22,7 @@ namespace Black.Bot.Validations
             return Task.FromResult(ValidationResult.FromError("Esse comando é apenas para desenvolvedores."));
         }
 
-        public override async Task NotEnoughPermissions(IUpdateContext context, string errorReason)
+        public async Task NotEnoughPermissions(BlackBotContext context, string errorReason)
         {
             await context.Client.SendTextMessageAsync(context.Update.GetChat(), errorReason);
         }

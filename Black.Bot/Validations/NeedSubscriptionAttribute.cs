@@ -1,5 +1,6 @@
 ﻿using Black.Bot.Models;
 using MongoDB.Driver;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
 using Telegram.Bot;
@@ -10,10 +11,12 @@ using TgBotFramework.WrapperExtensions;
 
 namespace Black.Bot.Validations
 {
-    public class NeedSubscriptionAttribute : CommandValidationAttribute
+    public class NeedSubscriptionAttribute : Attribute, ICommandValidationAttribute<BlackBotContext>
     {
-        public override async Task<ValidationResult> CheckPermissionsAsync(IUpdateContext context, string[] args)
+        public async Task<ValidationResult> CheckPermissionsAsync(BlackBotContext context, string[] args)
         {
+            var newArgs = CommandBase<BlackBotContext>.ParseCommandArgs(context.Update.Message);
+
             var senderId = context.Update.GetSenderId();
 
             IMongoDatabase db = context.Services.GetService(typeof(IMongoDatabase)) as IMongoDatabase;
@@ -27,7 +30,7 @@ namespace Black.Bot.Validations
             return ValidationResult.FromError("Você não tem nenhuma key ativa :(.");
         }
 
-        public override async Task NotEnoughPermissions(IUpdateContext context, string errorReason)
+        public async Task NotEnoughPermissions(BlackBotContext context, string errorReason)
         {
             await context.Client.SendTextMessageAsync(context.Update.GetChat(), errorReason);
         }
